@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Grid } from 'semantic-ui-react'
 import { IActivity } from '../../../app/models/activity'
 import ActivityList from './ActivityList'
@@ -14,7 +14,9 @@ interface IProps {
     setSelectedActivity: (activity: IActivity | null) => void;
     createActivity: (activity: IActivity) => void;
     editActivity: (activity: IActivity) => void;
-    deleteActivity: (id: string) => void;
+    deleteActivity: (event: SyntheticEvent<HTMLButtonElement>, id: string) => void;
+    submitting: boolean;
+    target: string;
 
 }
 
@@ -27,12 +29,14 @@ const ActivityDashboard: React.FC<IProps> = ({
     setSelectedActivity,
     createActivity,
     editActivity,
-    deleteActivity
+    deleteActivity,
+    submitting,
+    target
 }) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <ActivityList activities={activities} selectActivity={selectActivity} deleteActivity={deleteActivity}  />
+                <ActivityList activities={activities} selectActivity={selectActivity} deleteActivity={deleteActivity} submitting={submitting} target={target} />
                 {/* <List>
                     {activities.map((activity: any) => (
                         <List.Item key={activity.id}>{activity.title}</List.Item>
@@ -47,7 +51,14 @@ const ActivityDashboard: React.FC<IProps> = ({
                         setSelectedActivity={setSelectedActivity}
                     />
                 )}
-                {editMode && <ActivityForm key={selectedActivity?.id} setEditMode={setEditMode} activity={selectedActivity!} createActivity={createActivity} editActivity={editActivity} />}
+                {editMode && <ActivityForm
+                    key={selectedActivity?.id}
+                    setEditMode={setEditMode}
+                    activity={selectedActivity!}
+                    createActivity={createActivity}
+                    editActivity={editActivity}
+                    submitting={submitting}
+                />}
             </Grid.Column>
         </Grid>
     )
