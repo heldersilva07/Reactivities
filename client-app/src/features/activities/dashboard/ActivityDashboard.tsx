@@ -1,19 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import React, {  useContext } from 'react'
+import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import ActivityList from './ActivityList'
-import ActivityDetails from './details/ActivityDetails'
-import ActivityForm from './form/ActivityForm'
-import ActivityStore from '../../../app/stores/activityStore'
+
 
 
 const ActivityDashboard: React.FC = () => {
-    const activityStore = useContext(ActivityStore);
-    const { editMode, selectedActivity } = activityStore
+    //const activityStore = useContext(ActivityStore);
+    //const { editMode, activity } = activityStore
     return (
         <Grid>
             <Grid.Column width={10}>
-                <ActivityList  />
+                <ActivityList />
                 {/* <List>
                     {activities.map((activity: any) => (
                         <List.Item key={activity.id}>{activity.title}</List.Item>
@@ -21,13 +19,14 @@ const ActivityDashboard: React.FC = () => {
                 </List> */}
             </Grid.Column>
             <Grid.Column width={6}>
-                {selectedActivity && !editMode && (
+                {/* {activity && !editMode && (
                     <ActivityDetails/>
                 )}
                 {editMode && <ActivityForm
-                    key={selectedActivity?.id}
-                    activity={selectedActivity!}
-                />}
+                    key={activity?.id}
+                    activity={activity!}
+                />} */}
+                <h2>Activity filters</h2>
             </Grid.Column>
         </Grid>
     )
